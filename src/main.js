@@ -6,6 +6,14 @@ import store from "./store";
 
 Vue.config.productionTip = false;
 
+router.beforeEach((to, from, next) => {
+  if (to.name !== "Login" && !store.state.auth.authenticated) {
+    next("Login");
+  } else {
+    next();
+  }
+});
+
 new Vue({
   router,
   store,
